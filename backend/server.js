@@ -2,7 +2,7 @@ const path = require('path'); // Built into Node
 const express = require('express');
 const logger = require('morgan');
 const app = express();
-const hootsRouter = require('./controllers/hoots.js');
+const countryRouter = require('./controllers/countries.js');
 
 // Process the secrets/config vars in .env
 require('dotenv').config();
@@ -30,7 +30,7 @@ const ensureLoggedIn = require('./middleware/ensureLoggedIn');
 
 // API Routes
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/hoots',ensureLoggedIn,  require('./routes/hoots'));
+app.use('/api/countries', ensureLoggedIn,  require('./routes/countries.js'));
 
 
 
