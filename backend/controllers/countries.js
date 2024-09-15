@@ -125,10 +125,11 @@ async function indexCity(req, res) {
 }
 
 async function showCity(req, res) {
+  console.log("it runs")
   try {
-    const oneCity = await Country.findById(req.params.cityId).populate(
-      "traveller"
-    );
+    const country = await Country.findById(req.params.countryId)
+    const oneCity = country.city.id(req.params.cityId)
+    console.log(oneCity)
     res.status(201).json(oneCity);
   } catch (error) {
     res.status(500).json(error);

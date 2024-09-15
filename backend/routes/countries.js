@@ -11,6 +11,7 @@ router.get('/', countriesCtrl.index)
 
 
 router.get('/:countryId', countriesCtrl.show)
+// : this lets express know you will have a req.params. 
 
 
 router.put('/:countryId', countriesCtrl.update)
