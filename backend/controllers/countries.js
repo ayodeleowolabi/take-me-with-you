@@ -20,7 +20,6 @@ async function create(req, res) {
   try {
     req.body.traveller = req.user._id;
     const country = await Country.create(req.body);
-    country._doc.traveller = req.user;
     res.status(201).json(country);
   } catch (error) {
     console.log(error);
@@ -97,15 +96,13 @@ async function deleteCountry(req, res) {
 }
 
 async function createCity(req, res) {
+  console.log(req.body)
   try {
-    req.body.traveller = req.user._id;
     const country = await Country.findById(req.params.countryId);
     country.city.push(req.body);
-    country.save();
+    await country.save();
 
-    const newCity = country.city[country.city.length - 1];
-    newCity._doc.traveller = req.user;
-    res.status(201).json(newCity);
+    res.status(201).json(country);
   } catch (error) {
     res.status(500).json(error);
   }

@@ -29,7 +29,7 @@ const citySchema = new mongoose.Schema({
   rating: {
     type: String, 
     required: false,
-    enum:['*', '**','***','****','*****']
+    enum:['⭐', '⭐⭐','⭐⭐⭐','⭐⭐⭐⭐','⭐⭐⭐⭐⭐']
   },
   detailedRating: {
     type: String,
@@ -41,11 +41,11 @@ const citySchema = new mongoose.Schema({
 
 const countrySchema = new mongoose.Schema({
   name: {
-    type: String
+    type: String,
+    required: true
   }, 
   continent: {
-    type: String,
-    required: false
+    type: String
   },
   city: [citySchema],
   traveller: {
