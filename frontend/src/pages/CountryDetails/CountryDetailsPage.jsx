@@ -8,8 +8,8 @@ export default function CountryDetailsPage({
 
   const { countryId } = useParams();
   const country = countries.find((country) => country._id === countryId);
-  const city = country ? country.city : 0;
-  console.log(city);
+  if(!country ) return null
+  const city = country.city
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function CountryDetailsPage({
           </ul>
         </>
       )}
-      {user._id === country.traveller._id && (
+      { user._id === country.traveller._id && (
         <>
         <button onClick={() => handleDeleteCountry(countryId, city._id)}>
           Delete Country

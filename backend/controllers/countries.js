@@ -119,7 +119,7 @@ async function deleteCountry(req, res) {
 async function createCity(req, res) {
   console.log(req.body)
   try {
-    const country = await Country.findById(req.params.countryId);
+    const country = await Country.findById(req.params.countryId).populate('traveller')
     country.city.push(req.body);
     await country.save();
 
@@ -156,7 +156,7 @@ async function showCity(req, res) {
 
 async function updateCity(req, res) {
   try {
-    const country = await Country.findById(req.params.countryId);
+    const country = await Country.findById(req.params.countryId)
     if (!country) return res.status(404).json({ message: 'Country not found' });
 
     const city = country.city.id(req.params.cityId);
