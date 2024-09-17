@@ -1,40 +1,30 @@
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const NewCityFormPage = ({ handleSubmitCity, countries}) => {
-    const { countryId } = useParams()
+const EditCityFormPage = ({handleSubmitUpdatedCity, countries }) => {
+  const [formData, setFormData] = useState(null);
+  const { cityId, countryId } = useParams();
   
-    const country = countries.find((country) => country._id === countryId);
-    console.log(country)
+  const country = countries.find((country) => country._id === countryId);
+  const city = country && country.city.find((city) => city._id === cityId);
+  
+  useEffect(() => {
+      if (city) setFormData({ ...city });
+    }, [city]);
     
-    
-    
-    const [formData, setFormData] = useState({
-      name: '',
-      historicalSites: '',
-      entertainment: '',
-      food: '',
-      timeSpent:'',
-      season: '',
-      rating: "⭐",
-      detailedRating: ''
-    });
-    
-    
-    const handleChange = (evt) => {
+    if (!city || !formData) return null;
+
+  const handleChange = (evt) => {
       setFormData({ ...formData, [evt.target.name]: evt.target.value });
-      console.log(evt)
-      console.log(evt.target)
-      console.log(evt.target.value)
-    };
-    
-    
-    if (!country) return null;
+    console.log(evt);
+    console.log(evt.target);
+    console.log(evt.target.value);
+  };
 
   return (
     <main>
-      <h1>Add a City to {country.name}</h1>
-      <form onSubmit={ (evt) => handleSubmitCity(evt, countryId, formData)}>
+      <h1>Tell us about your trip to {country.name}!</h1>
+      <form onSubmit={(evt) => handleSubmitUpdatedCity(evt, cityId, countryId, formData)}>
         <label htmlFor="name-input">City Name</label>
         <input
           required
@@ -51,7 +41,6 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
           id="historicalSites-input"
           value={formData.historicalSites}
           onChange={handleChange}
-    
         />
         <label htmlFor="entertainment-input">Entertainment</label>
         <textarea
@@ -60,7 +49,6 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
           id="entertainment-input"
           value={formData.entertainment}
           onChange={handleChange}
-    
         />
         <label htmlFor="food-input">Food</label>
         <textarea
@@ -69,7 +57,6 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
           id="food-input"
           value={formData.food}
           onChange={handleChange}
-    
         />
         <label htmlFor="timespent-input">Time Spent</label>
         <input
@@ -78,7 +65,6 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
           id="food-input"
           value={formData.timeSpent}
           onChange={handleChange}
-    
         />
         <label htmlFor="season-input">Season</label>
         <input
@@ -87,32 +73,37 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
           id="season-input"
           value={formData.season}
           onChange={handleChange}
-    
         />
 
         <label htmlFor="detailedRating-input">Details</label>
-        <select value={formData.rating} name='rating' onChange={handleChange}>
-            <option value='⭐'>⭐</option>
-            <option value='⭐⭐'>⭐⭐</option>
-            <option value='⭐⭐⭐'>⭐⭐⭐</option>
-            <option value='⭐⭐⭐⭐'>⭐⭐⭐⭐</option>
-            <option value='⭐⭐⭐⭐⭐'>⭐⭐⭐⭐⭐</option>
-        
-           
+        <select value={formData.rating} name="rating" onChange={handleChange}>
+          <option value="⭐">⭐</option>
+          <option value="⭐⭐">⭐⭐</option>
+          <option value="⭐⭐⭐">⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
         </select>
-        <label htmlFor="detailedRating-input">Details: Tell us more about your highlights or dissapointments!</label>
+        <label htmlFor="detailedRating-input">
+          Details: Tell us more about your highlights or dissapointments!
+        </label>
         <textarea
           type="text"
           name="detailedRating"
           id="detailedRating-input"
           value={formData.detailedRating}
           onChange={handleChange}
-    
         />
-        <button onClick={(evt) => {console.log(evt.type)}} type="submit">SUBMIT</button>
+        <button
+          onClick={(evt) => {
+            console.log(evt.type);
+          }}
+          type="submit"
+        >
+          SUBMIT
+        </button>
       </form>
     </main>
   );
 };
 
-export default NewCityFormPage
+export default EditCityFormPage;

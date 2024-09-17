@@ -12,6 +12,11 @@ export async function fetchCountries() {
   return countries;
 }
 
+export async function fetchCountriesByUser(userId){
+  const countries = await sendRequest(`${BASE_URL}/yourcountries?userId=${userId}`, "GET");
+  return countries
+}
+
 export async function fetchCountryById(countryId) {
   const country = await sendRequest(`${BASE_URL}/${countryId}`, "GET");
   return country;
@@ -64,7 +69,7 @@ export async function updateCity(cityId, countryId, updatedCityData){
 };
 
 
-export async function deleteCity(cityId, countryId){
+export async function deleteCity(countryId, cityId){
     const deletedCity = await sendRequest(
         `${BASE_URL}/${countryId}/city/${cityId}`,
         "DELETE"

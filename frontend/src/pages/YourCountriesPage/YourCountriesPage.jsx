@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 
-export default function HomePage({ countries, user }) {
+export default function YourCountriesPage({ countries, user }) {
 
   return (
     <>
-      {user ? (
+      {countries.traveller._id === user._id ? (
         <>
           <h1>Countries</h1>
-
           <ul>
             {countries.length &&
               countries.map((country) => (

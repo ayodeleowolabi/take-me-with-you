@@ -9,6 +9,8 @@ router.post('/', countriesCtrl.create)
 // INDEX FUNCTIONALITY
 router.get('/', countriesCtrl.index)
 
+router.get('/yourcountries', countriesCtrl.indexYourCountries)
+
 
 router.get('/:countryId', countriesCtrl.show)
 // : this lets express know you will have a req.params. 

@@ -6,6 +6,7 @@ const Country = require("../models/country.js");
 module.exports = {
   create,
   index,
+  indexYourCountries,
   show,
   update,
   deleteCountry,
@@ -37,6 +38,26 @@ async function index(req, res) {
     res.status(500).json(error);
   }
 }
+
+async function indexYourCountries(req, res) {
+  console.log('getting your countries:', req.body)
+  console.log('getting your countries:', req.user)
+
+  try {
+    req.body.traveller = req.user._id;
+    const userId = req.body.traveller
+    const countries = await Country.find({traveller: userId})
+      .populate("traveller")
+      .sort({ createdAt: "desc" });
+      console.log(userId)
+      console.log(countries)
+    res.status(200).json(countries);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+}
+
+
 
 async function show(req, res) {
   try {

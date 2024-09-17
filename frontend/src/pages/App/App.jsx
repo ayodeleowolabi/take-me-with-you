@@ -1,23 +1,30 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { getUser } from "../../services/authService";
-import { fetchCountries, createCountry, createCity } from "../../services/countryService";
+import {
+  fetchCountries,
+  createCountry,
+  createCity,
+  deleteCountry,
+  deleteCity,
+  updateCity
+} from "../../services/countryService";
 import "./App.css";
 import NavBar from "../../components/NavBar/NavBar";
 import HomePage from "../HomePage/HomePage";
-import PostListPage from "../PostListPage/PostListPage";
 import NewCountryPageForm from "../NewCountryPage/NewCountryPage";
-import CountryDetailsPage from '../CountryDetails/CountryDetailsPage'
+import EditCityFormPage from "../../components/EditCityForm/EditCityForm";
+import CountryDetailsPage from "../CountryDetails/CountryDetailsPage";
 import CityDetailsPage from "../CityDetailsPage/CityDetailsPage";
 import NewCityFormPage from "../NewCityFormPage/NewCityFormPage";
 import SignUpPage from "../SignUpPage/SignUpPage";
 import LogInPage from "../LogInPage/LogInPage";
+import YourCountriesPage from "../YourCountriesPage/YourCountriesPage";
 
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(getUser());
   const [countries, setCountries] = useState([]);
-  const [cities, setCities] = useState([])
 
   const getAllCountries = async () => {
     const countries = await fetchCountries();
@@ -26,19 +33,53 @@ function App() {
   const handleSubmitCountry = async (evt, formData) => {
     evt.preventDefault();
     const newCountry = await createCountry(formData);
+  
     setCountries([...countries, newCountry]);
     navigate("/");
   };
 
   const handleSubmitCity = async (evt, countryId, formData) => {
     evt.preventDefault();
-    
+
     const updatedCountry = await createCity(countryId, formData);
-    const updatedCountries = countries.map((country) => country._id === countryId ? updatedCountry : country)
-    setCountries(updatedCountries)
-    navigate(`/country/${countryId}`)
+    const updatedCountries = countries.map((country) =>
+      country._id === countryId ? updatedCountry : country
+    );
+    setCountries(updatedCountries);
+    navigate(`/country/${countryId}`);
   };
-  
+  const handleSubmitUpdatedCity = async (evt, cityId, countryId, formData) => {
+    evt.preventDefault();
+
+    const updatedCountry = await updateCity(cityId, countryId, formData);
+    const updatedCountries = countries.map((country) =>
+      country._id === countryId ? updatedCountry : country
+    );
+    setCountries(updatedCountries);
+    navigate(`/country/${countryId}/city/${cityId}`);
+  };
+
+  const handleDeleteCountry = async (countryId) => {
+    const deletedCountry = await deleteCountry(countryId);
+
+    setCountries(
+      countries.filter((country) => country._id !== deletedCountry._id)
+    );
+    navigate('/');
+  };
+
+
+
+
+  const handleDeleteCity = async (countryId, cityId) => {
+    const deletedCity = await deleteCity(countryId, cityId)
+    setCountries(
+      countries.filter((country) => country.city._id !== deletedCity)
+    
+    )
+    navigate(`/`);
+    
+  };
 
   useEffect(() => {
     getAllCountries();
@@ -56,23 +97,39 @@ function App() {
             />
             <Route
               path="/country/:countryId"
-              element={<CountryDetailsPage user={user} countries={countries} />}
+              element={
+                <CountryDetailsPage
+                  handleDeleteCountry={handleDeleteCountry}
+                  user={user}
+                  countries={countries}
+                />
+              }
             />
-            <Route path="/country" element={<PostListPage />} />
+            <Route path="/yourcountries" element={<YourCountriesPage />} />
             <Route
               path="/country/new"
               element={
                 <NewCountryPageForm handleSubmitCountry={handleSubmitCountry} />
               }
             />
-              <Route
-                path="/country/:countryId/city/:cityId"
-                element={<CityDetailsPage user={user} countries={countries} />}
-              />
-              <Route
-                path="/country/:countryId/newcity"
-                element={<NewCityFormPage user={user} countries={countries} handleSubmitCity={handleSubmitCity} />}
-              />
+            <Route
+              path="/country/:countryId/city/:cityId"
+              element={<CityDetailsPage user={user} countries={countries} handleDeleteCity={handleDeleteCity} />}
+            />
+            <Route
+              path="/country/:countryId/city/:cityId/edit"
+              element={<EditCityFormPage countries={countries} handleSubmitUpdatedCity={handleSubmitUpdatedCity}/>}
+            />
+            <Route
+              path="/country/:countryId/newcity"
+              element={
+                <NewCityFormPage
+                  user={user}
+                  countries={countries}
+                  handleSubmitCity={handleSubmitCity}
+                />
+              }
+            />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ) : (
