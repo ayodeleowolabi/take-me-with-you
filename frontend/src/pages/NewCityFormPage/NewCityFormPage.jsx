@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import styles from '../App/Form.module.css'
 
 const NewCityFormPage = ({ handleSubmitCity, countries}) => {
     const { countryId } = useParams()
@@ -32,8 +33,9 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
     if (!country) return null;
 
   return (
-    <main>
-      <h1>Add a City to {country.name}</h1>
+    <main className={styles.form}>
+      
+      <h2>add a city to {country.name}</h2>
       <form onSubmit={ (evt) => handleSubmitCity(evt, countryId, formData)}>
         <label htmlFor="name-input">City Name</label>
         <input

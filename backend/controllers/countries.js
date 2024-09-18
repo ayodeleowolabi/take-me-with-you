@@ -20,7 +20,7 @@ module.exports = {
 async function create(req, res) {
   try {
     req.body.traveller = req.user._id;
-    const country = await Country.create(req.body);
+    const country = (await Country.create(req.body)).populate('traveller')
     res.status(201).json(country);
   } catch (error) {
     console.log(error);

@@ -1,6 +1,7 @@
 // src/components/HootForm/HootForm.jsx
 
 import { useState } from 'react';
+import styles from '../App/Form.module.css'
 
 const NewCountryPageForm = ({handleSubmitCountry}) => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const NewCountryPageForm = ({handleSubmitCountry}) => {
 
 
   return (
-    <main>
+    <main className={styles.form}>
       <form onSubmit={ (evt) => handleSubmitCountry(evt, formData)}>
         <label htmlFor="name-input">Country Name</label>
         <input

@@ -21,6 +21,8 @@ import SignUpPage from "../SignUpPage/SignUpPage";
 import LogInPage from "../LogInPage/LogInPage";
 import YourCountriesPage from "../YourCountriesPage/YourCountriesPage";
 
+import styles from './App.module.css'
+
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(getUser());
@@ -30,6 +32,9 @@ function App() {
     const countries = await fetchCountries();
     setCountries(countries);
   };
+
+
+
   const handleSubmitCountry = async (evt, formData) => {
     evt.preventDefault();
     const newCountry = await createCountry(formData);
@@ -46,7 +51,7 @@ function App() {
       country._id === countryId ? updatedCountry : country
     );
     setCountries(updatedCountries);
-    navigate(`/country/${countryId}`);
+    navigate(`/country}`);
   };
   const handleSubmitUpdatedCity = async (evt, cityId, countryId, formData) => {
     evt.preventDefault();
@@ -83,10 +88,12 @@ function App() {
 
   useEffect(() => {
     getAllCountries();
+  
+
   }, [user]);
 
   return (
-    <main id="react-app">
+    <main id="react-app" >
       <NavBar user={user} setUser={setUser} />
       <section id="main-section">
         {user ? (
@@ -105,7 +112,7 @@ function App() {
                 />
               }
             />
-            <Route path="/yourcountries" element={<YourCountriesPage />} />
+            <Route path="/yourcountries" element={<YourCountriesPage user={user} countries={countries} />} />
             <Route
               path="/country/new"
               element={

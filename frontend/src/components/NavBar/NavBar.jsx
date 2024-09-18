@@ -14,7 +14,7 @@ export default function NavBar({ user, setUser }) {
       &nbsp; | &nbsp;
       {user ? (
         <>
-          <Link to="/country">Country List</Link>
+          <Link to="/yourcountries">Your Country List</Link>
           &nbsp; | &nbsp;
           <Link to="/country/new">New Country</Link>
           &nbsp; | &nbsp;

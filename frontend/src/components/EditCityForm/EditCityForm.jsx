@@ -23,7 +23,7 @@ const EditCityFormPage = ({handleSubmitUpdatedCity, countries }) => {
 
   return (
     <main>
-      <h1>Tell us about your trip to {country.name}!</h1>
+      <h2>Edit your {country.name} log</h2>
       <form onSubmit={(evt) => handleSubmitUpdatedCity(evt, cityId, countryId, formData)}>
         <label htmlFor="name-input">City Name</label>
         <input

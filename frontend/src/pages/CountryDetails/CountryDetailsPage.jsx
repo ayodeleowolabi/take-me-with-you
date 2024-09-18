@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import styles from '../App/App.module.css'
 
 export default function CountryDetailsPage({
   countries,
@@ -23,7 +24,7 @@ export default function CountryDetailsPage({
           <ul>
             {city.length &&
               city.map((city) => (
-                <li key={city._id}>
+                <li key={city._id} className={styles.card}>
                   <Link to={`/country/${country._id}/city/${city._id}`}>
                     <h2>{city.name}</h2>
                     <p>{city.timeSpent}</p>

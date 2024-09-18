@@ -1,16 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Bangers", system-ui;
   line-height: 1.5;
   font-weight: 400;
-
-  color: #1a1a1a;
-  background-color: whitesmoke;
-
+  color: black;
+  background-color:#ff7715;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+h1 {
+  font-size: 10vmin;
+  margin: auto;
+}
+p {
+color: black;
+}
+
 
 * {
   box-sizing: border-box;
@@ -84,6 +93,7 @@ label {
 
 h2 {
   text-align: center;
+  font-size: 5vmin;
 }
 
 .error-message {

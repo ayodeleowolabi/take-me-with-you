@@ -1,29 +1,33 @@
 import { Link } from "react-router-dom";
+import styles from '../App/App.module.css'
 
-export default function YourCountriesPage({ countries, user }) {
+export default function YourCountriesPage({
+  countries,
+  user,
+}) {
+  // Trigger getUserCountries when user is available
+  if(!countries) return null
+  let yourCountries = countries.filter((country) => country.traveller._id === user._id);
+
 
   return (
     <>
-      {countries.traveller._id === user._id ? (
-        <>
-          <h1>Countries</h1>
-          <ul>
-            {countries.length &&
-              countries.map((country) => (
-                <li key={country._id}>
-                  <Link to={`/country/${country._id}`}>
-                    <h2>{country.name}</h2>
-                    <p>{country.continent}</p>
-                    <p>{country.traveller._id}</p>
-
-                  </Link>
-                </li>
-              ))}
-          </ul>
-        </>
-      ) : (
-        <h1>Login!</h1>
-      )}
+      <h1>your countries</h1>
+      <ul>
+        {yourCountries && yourCountries.length > 0 ? (
+          yourCountries.map((country) => (
+            <li key={country._id} className={styles.card}>
+              <Link to={`/country/${country._id}`}>
+                <h2>{country.name}</h2>
+                <h2>{country.traveller.name}</h2>
+                <p> continent of {country.continent}</p>
+              </Link>
+            </li>
+          ))
+        ) : (
+          <p>No countries to display.</p> // Fallback if there are no countries
+        )}
+      </ul>
     </>
   );
 }
