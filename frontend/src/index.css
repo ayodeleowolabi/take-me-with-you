@@ -38,7 +38,7 @@ button {
   border: 0.5vmin solid #1a1a1a;
   border-radius: 0.5vmin;
   padding: 0.8vmin;
-  font-size: 2vmin;
+  font-size: 3vmin;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
@@ -54,12 +54,18 @@ button:disabled {
   background-color: grey;
 }
 
+main{
+  display: flex;
+
+
+}
+
 a {
   border-radius: 0.8vmin;
   padding: 0.5vmin;
   font-size: 2vmin;
   text-decoration: none;
-  color: #1a1a1a;
+  color: black;
 }
 
 a:hover {
@@ -68,16 +74,21 @@ a:hover {
 }
 
 form {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   gap: 1.2vmin;
   padding: 4vmin;
+  margin: auto;
   border: 0.5vmin solid #1a1a1a;
   border-radius: 1vmin;
+  align-items: stretch; /* Ensures all form elements take up full width */
 }
 
+
 input {
-  padding: 0.7vmin;
-  font-size: 2vmin;
+  padding: 1vmin;
+  font-size: 3vmin;
   border: 0.3vmin solid #1a1a1a;
   border-radius: 0.5vmin;
 }
@@ -87,8 +98,9 @@ form > button:last-child {
 }
 
 label {
-  font-size: 2vmin;
+  font-size: 5vmin;
   font-weight: bold;
+  margin: 1vmin;
 }
 
 h2 {
@@ -99,3 +111,4 @@ h2 {
 .error-message {
   color: rgb(166, 29, 29);
 }
+

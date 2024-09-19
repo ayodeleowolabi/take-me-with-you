@@ -33,10 +33,13 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
     if (!country) return null;
 
   return (
-    <main className={styles.form}>
+    <>
+    <br></br>
+      <h1>add a city to {country.name}</h1>
+      <br></br>
+    <main>
       
-      <h2>add a city to {country.name}</h2>
-      <form onSubmit={ (evt) => handleSubmitCity(evt, countryId, formData)}>
+      <form className={styles.form} onSubmit={ (evt) => handleSubmitCity(evt, countryId, formData)}>
         <label htmlFor="name-input">City Name</label>
         <input
           required
@@ -92,7 +95,7 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
     
         />
 
-        <label htmlFor="detailedRating-input">Details</label>
+        <label htmlFor="detailedRating-input">Rating</label>
         <select value={formData.rating} name='rating' onChange={handleChange}>
             <option value='⭐'>⭐</option>
             <option value='⭐⭐'>⭐⭐</option>
@@ -114,6 +117,7 @@ const NewCityFormPage = ({ handleSubmitCity, countries}) => {
         <button onClick={(evt) => {console.log(evt.type)}} type="submit">SUBMIT</button>
       </form>
     </main>
+    </>
   );
 };
 

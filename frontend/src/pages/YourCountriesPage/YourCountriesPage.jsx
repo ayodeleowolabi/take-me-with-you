@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import styles from '../App/App.module.css'
+import styles from "../App/App.module.css";
 
-export default function YourCountriesPage({
-  countries,
-  user,
-}) {
+export default function YourCountriesPage({ countries, user }) {
   // Trigger getUserCountries when user is available
-  if(!countries) return null
-  let yourCountries = countries.filter((country) => country.traveller._id === user._id);
-
+  if (!countries.length) return null;
+  let yourCountries = countries.filter(
+    (country) => country.traveller._id === user._id
+  );
 
   return (
     <>
-      <h1>your countries</h1>
+    {yourCountries.length ? <h1>your countries</h1> : <h1>log your first country</h1>}
       <ul>
         {yourCountries && yourCountries.length > 0 ? (
           yourCountries.map((country) => (
@@ -25,7 +23,12 @@ export default function YourCountriesPage({
             </li>
           ))
         ) : (
-          <p>No countries to display.</p> // Fallback if there are no countries
+          <>
+            <a href={`/country/new`}>
+  <button>Add New Country</button>
+</a>
+
+          </>
         )}
       </ul>
     </>

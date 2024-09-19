@@ -1,6 +1,8 @@
 /* From Uiverse.io by 0xnihilism */ 
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 .card {
-    width: 320px;
+    width: 100vmin;
     padding: 20px;
     background: #fff;
     border: 8px solid #000;
@@ -10,6 +12,9 @@
     position: relative;
     overflow: hidden;
     margin: 5vmin;
+  }
+  #formlinebreaks{
+    white-space: pre-wrap;
   }
   .card:active {
     animation: shake 0.5s ease-in-out;
@@ -36,7 +41,7 @@
   }
   .banner-text {
     display: inline-block;
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 1s ease, transform 0.5s ease;
     width: 100%;
     position: absolute;
     left: 13%;

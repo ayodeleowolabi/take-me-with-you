@@ -7,6 +7,7 @@ export default function CityDetailsPage({ user, countries, handleDeleteCity }) {
   const { cityId } = useParams();
   if (!country) return null;
   const city = country.city.find((city) => city._id === cityId);
+  if (!city) return null;
   console.log(city);
   console.log(country);
 
@@ -14,28 +15,51 @@ export default function CityDetailsPage({ user, countries, handleDeleteCity }) {
     <>
       {!country ? <h1>Something</h1> : null}
       <>
-        <div className={styles.card}>
-          <h2>{city.name}</h2>
+        <div id="formlinebreaks" className={styles.card}>
+            {country.traveller.name === user.name? <p> Your Travel log</p> : <p>{country.traveller.name}'s travel log</p>}
+          <h1>{city.name}</h1>
+          <h2>Historical Sites </h2>
           <ul>
-    
+            {city.historicalSites
+              ? city.historicalSites.split("\n").map((site, index) => (
+                  <li key={index}>
+                    {site}
+                    <br />
+                  </li>
+                ))
+              : "Historical sites loading..."}
 
+            <h2>food</h2>
+            {city.food
+              ? city.food.split("\n").map((site, index) => (
+                  <li key={index}>
+                    {site}
+                    <br />
+                  </li>
+                ))
+              : "Food info loading..."}
+            <h2>Entertainment</h2>
+            {city.entertainment
+              ? city.entertainment.split("\n").map((site, index) => (
+                  <li key={index}>
+                    {site}
+                    <br></br>
+                  </li>
+                ))
+              : "Entertainment loading..."}
+               <br></br>
+               <br></br>
 
+            <>Time Spent: {city.timeSpent || ""}</>
+            <br></br>
+            <> season: {city.season || ""}</>
 
-            {city.historicalSites || "No Historical Sites"}
             <br></br>
-            {city.food || "No Food"}
+            <>Rating: </>{city.rating}
             <br></br>
-            {city.entertainment || "No Entertainment"}
-            <br></br>
-            {city.timeSpent || "No Time Logged"}
-            <br></br>
-            {city.season || "No Season"}
-            <br></br>
-            {city.rating}
-            <br></br>
-            {city.detailedRating || "No details"}
-
+            {city.detailedRating || ""}
           </ul>
+          <br></br>
         </div>
       </>
       {user._id === country.traveller._id && (
@@ -43,7 +67,7 @@ export default function CityDetailsPage({ user, countries, handleDeleteCity }) {
           <Link to={`/country/${countryId}/city/${cityId}/edit`}>
             Edit {city.name}
           </Link>
-          <button onClick={() => handleDeleteCity(countryId)}>
+          <button onClick={() => handleDeleteCity(countryId, cityId)}>
             Delete City
           </button>
         </>

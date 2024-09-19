@@ -21,7 +21,6 @@ import SignUpPage from "../SignUpPage/SignUpPage";
 import LogInPage from "../LogInPage/LogInPage";
 import YourCountriesPage from "../YourCountriesPage/YourCountriesPage";
 
-import styles from './App.module.css'
 
 function App() {
   const navigate = useNavigate();
@@ -40,7 +39,7 @@ function App() {
     const newCountry = await createCountry(formData);
   
     setCountries([...countries, newCountry]);
-    navigate("/");
+    navigate("/yourcountries");
   };
 
   const handleSubmitCity = async (evt, countryId, formData) => {
@@ -51,7 +50,7 @@ function App() {
       country._id === countryId ? updatedCountry : country
     );
     setCountries(updatedCountries);
-    navigate(`/country}`);
+    navigate(`/country/${countryId}`);
   };
   const handleSubmitUpdatedCity = async (evt, cityId, countryId, formData) => {
     evt.preventDefault();
@@ -75,19 +74,24 @@ function App() {
 
 
 
-
   const handleDeleteCity = async (countryId, cityId) => {
-    const deletedCity = await deleteCity(countryId, cityId)
-    setCountries(
-      countries.filter((country) => country.city._id !== deletedCity)
-    
-    )
-    navigate(`/`);
-    
+    try {
+      let country = countries.map((country) => {country._id === countryId})
+      let cities = country.cities
+      // Update countries by filtering out the deleted city
+      setCountries(cities.filter((city) => city._id !== cityId))
+        
+  
+  
+      navigate(`/country/${countryId}`);
+    } catch (error) {
+      console.error("Error deleting city:", error);
+    }
   };
+  
 
   useEffect(() => {
-    getAllCountries();
+    if (user) getAllCountries();
   
 
   }, [user]);

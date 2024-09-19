@@ -1,4 +1,6 @@
 /* From Uiverse.io by andrew-demchenk0 */ 
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
 .form {
     --input-focus: #2d8cf0;
     --font-color: #fefefe;
@@ -6,6 +8,7 @@
     --bg-color: #111;
     --bg-color-alt: #7e7e7e;
     --main-color: #fefefe;
+    justify-content: center;
       /* display: flex; */
       /* flex-direction: column; */
       /* align-items: center; */
@@ -43,6 +46,7 @@
     text-decoration: none;
     color: var(--font-color);
     font-weight: 600;
+    width: 50vmin
   }
   
   .toggle {

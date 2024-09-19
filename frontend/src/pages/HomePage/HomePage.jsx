@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 
-import styles from '../App/App.module.css'
+import styles from "../App/App.module.css";
 export default function HomePage({ countries, user }) {
-
-if (!countries) return null
   return (
     <>
       {user ? (
@@ -18,15 +16,20 @@ if (!countries) return null
                     <h2>{country.traveller.name}</h2>
                     <p>Continent of {country.continent}</p>
                   </Link>
-                  
                 </li>
               ))}
-              
           </ul>
         </>
-        
       ) : (
-        <h1>Login!</h1>
+        <>
+          <h1 className={styles.card}>take me with you!</h1>
+          <a href="/signup">
+            <button>Sign Up</button>
+          </a>
+          <a href="/login">
+            <button>Log in</button>
+          </a>
+        </>
       )}
     </>
   );
