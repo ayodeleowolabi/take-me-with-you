@@ -1,5 +1,5 @@
 # Take Me With You?
-Welcome to my second app as a software developer. I love travelling and will be moving back to Spain in a month. I wanted to create an app that coulr easily log my travels and my friends travels. The goal is to see what everyone in my community has been up to and what their travels looked like. **howUdoin**.
+Welcome to my second app as a software developer. I love travelling and will be moving back to Spain in a month. I wanted to create an app that coulr easily log my travels and my friends travels. The goal is to see what everyone in my community has been up to and what their travels looked like.
 
 I developed this app using **HTML, CSS**, **Javascript**, **Node JS**, **Express**, **mongoose** and **React**.
 
@@ -28,7 +28,7 @@ I developed this app using **HTML, CSS**, **Javascript**, **Node JS**, **Express
 
 
 
-> **Shoutout** to Sam for helping me tremedously as I struggled with where to start. 
+> **Shoutout** to Sam for helping me tremedously as I struggled with where to start and to Jim for dealing with all my questions and issues.
 
 
 ## How to Use
@@ -45,11 +45,11 @@ One exciting feature I love about the app is the ability to see other traveller'
 * Make a more interesting UI.
 * Figure out how to make it a social media app. 
 * Figure out how to create a list when rendering multiple typed entries in "Historical Sites, Food, Entertainment" Would I need a subdocument again or can I do it in the front end? 
-* 
+
 
 ## Live Demo
-You can use my first ever app creation **howUdoin?** [here](
+You can use my first ever app creation **Take Me With You** [here](
 https://take-me-with-you-2ffc640dfa66.herokuapp.com/)
 
 ### Screenshot
-![quizgame](howUdoin.png)
+![Take Me With you.](TakeMe.png)

@@ -22,7 +22,8 @@ export default function HomePage({ countries, user }) {
         </>
       ) : (
         <>
-          <h1 className={styles.card}>take me with you!</h1>
+          <h1 className={styles.card}>take me! ✈️</h1>
+          <h3 className={styles.card}>Your new favorite travel app. 😁</h3>
           <a href="/signup">
             <button>Sign Up</button>
           </a>
