@@ -168,7 +168,7 @@ async function updateCity(req, res) {
 
     await country.save(); // Save the parent document
 
-    res.status(200).json(city);
+    res.status(200).json(country);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

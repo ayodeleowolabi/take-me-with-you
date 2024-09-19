@@ -76,14 +76,13 @@ function App() {
 
   const handleDeleteCity = async (countryId, cityId) => {
     try {
-      let country = countries.map((country) => {country._id === countryId})
-      let cities = country.cities
-      // Update countries by filtering out the deleted city
-      setCountries(cities.filter((city) => city._id !== cityId))
+      const updatedCountry = await deleteCity(countryId, cityId)
+      let updatedCountries = countries.map((country) => {country._id === updatedCountry._id ? updatedCountry : country})
+      setCountries(updatedCountries)
         
   
   
-      navigate(`/country/${countryId}`);
+    
     } catch (error) {
       console.error("Error deleting city:", error);
     }

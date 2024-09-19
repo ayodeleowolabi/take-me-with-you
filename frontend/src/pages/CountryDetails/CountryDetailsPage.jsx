@@ -32,6 +32,7 @@ export default function CountryDetailsPage({
                 </li>
               ))}
           </ul>
+          
         </>
       )}
       {user._id === country.traveller._id && (

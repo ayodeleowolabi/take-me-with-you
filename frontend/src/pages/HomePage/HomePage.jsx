@@ -12,8 +12,8 @@ export default function HomePage({ countries, user }) {
               countries.map((country) => (
                 <li key={country._id} className={styles.card}>
                   <Link to={`/country/${country._id}`}>
-                    <h2>{country.name}</h2>
-                    <h2>{country.traveller.name}</h2>
+                  <h2>{country.name}</h2>
+                  <h2>{country.traveller.name}</h2>
                     <p>Continent of {country.continent}</p>
                   </Link>
                 </li>

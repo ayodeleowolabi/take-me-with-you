@@ -60,14 +60,20 @@ main{
 
 }
 
-a {
+nav a {
   border-radius: 0.8vmin;
   padding: 0.5vmin;
-  font-size: 2vmin;
+  font-size: 3.5vmin;
   text-decoration: none;
-  color: black;
+  color :white 
 }
 
+
+a {
+  color: black;
+  text-decoration: none;
+  font-size: 5vmin;
+}
 a:hover {
   background-color: #1a1a1a;
   color: whitesmoke;
@@ -105,7 +111,7 @@ label {
 
 h2 {
   text-align: center;
-  font-size: 5vmin;
+  font-size: 7vmin;
 }
 
 .error-message {

@@ -10,7 +10,16 @@ export default function YourCountriesPage({ countries, user }) {
 
   return (
     <>
-    {yourCountries.length ? <h1>your countries</h1> : <h1>log your first country</h1>}
+      {yourCountries.length ? (
+        <>
+        <h1>your countries</h1>
+      <a href={`/country/new`}>
+        <button>Add New Country</button>
+      </a>
+      </>
+      ) : (
+        <h1>log your first country</h1>
+      )}
       <ul>
         {yourCountries && yourCountries.length > 0 ? (
           yourCountries.map((country) => (
@@ -25,9 +34,8 @@ export default function YourCountriesPage({ countries, user }) {
         ) : (
           <>
             <a href={`/country/new`}>
-  <button>Add New Country</button>
-</a>
-
+              <button>Add New Country</button>
+            </a>
           </>
         )}
       </ul>
