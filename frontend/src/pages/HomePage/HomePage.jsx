@@ -6,7 +6,7 @@ export default function HomePage({ countries, user }) {
     <>
       {user ? (
         <>
-          <h1>Our Countries </h1>
+          <h1>Our Adventures! </h1>
           <ul>
             {countries.length &&
               countries.map((country) => (

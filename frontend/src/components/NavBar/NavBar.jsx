@@ -10,7 +10,7 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav className="NavBar">
-      <Link to="/">Home</Link>
+      <Link to="/"> ✈️ &nbsp; &nbsp; &nbsp; &nbsp; Home</Link>
       &nbsp; | &nbsp;
       {user ? (
         <>
@@ -27,7 +27,7 @@ export default function NavBar({ user, setUser }) {
       ) : (
         <>
           <Link to="/login">Log In</Link>
-          &nbsp; | &nbsp;
+          &nbsp; | &nbsp; 
           <Link to="/signup">Sign Up</Link>
         </>
       )}
