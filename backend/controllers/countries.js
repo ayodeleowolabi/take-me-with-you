@@ -158,7 +158,7 @@ async function showCity(req, res) {
 
 async function updateCity(req, res) {
   try {
-    const country = await Country.findById(req.params.countryId);
+    const country = await Country.findById(req.params.countryId).populate('traveller');
     if (!country) return res.status(404).json({ message: "Country not found" });
 
     const city = country.city.id(req.params.cityId);
@@ -182,11 +182,12 @@ async function deleteCity(req, res) {
     const city = country.city.id(req.params.cityId);
     if (!city) return res.status(404).json({ message: "City not found" });
 
-    country.city.pull({ _id: req.params.cityId });
+    // country.city.pull({ _id: req.params.cityId });
+    city.deleteOne()
 
     await country.save(); // Save the parent document
 
-    res.status(200).json({ message: "City Removed!" });
+    res.status(200).json(country);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -7,7 +7,11 @@ export default function CountryDetailsPage({
   handleDeleteCountry,
 }) {
   const { countryId } = useParams();
-  const country = countries.find((country) => country._id === countryId);
+  console.log(countries);
+
+  const country = countries.find((country) => {
+    return country._id === countryId;
+  });
   if (!country) return null;
   const city = country.city;
 
@@ -15,7 +19,7 @@ export default function CountryDetailsPage({
     <>
       {city.length === 0 ? (
         <>
-          <p>{country.traveller.name || 'You'} has logged no cities in</p>
+          <p>{country.traveller.name || "You"} has logged no cities in</p>
           <h1>{country.name}</h1>
         </>
       ) : (
@@ -32,7 +36,6 @@ export default function CountryDetailsPage({
                 </li>
               ))}
           </ul>
-          
         </>
       )}
       {user._id === country.traveller._id && (

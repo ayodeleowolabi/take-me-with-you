@@ -7,7 +7,7 @@ import {
   createCity,
   deleteCountry,
   deleteCity,
-  updateCity
+  updateCity,
 } from "../../services/countryService";
 import "./App.css";
 import NavBar from "../../components/NavBar/NavBar";
@@ -21,7 +21,6 @@ import SignUpPage from "../SignUpPage/SignUpPage";
 import LogInPage from "../LogInPage/LogInPage";
 import YourCountriesPage from "../YourCountriesPage/YourCountriesPage";
 
-
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(getUser());
@@ -31,13 +30,18 @@ function App() {
     const countries = await fetchCountries();
     setCountries(countries);
   };
-
-
+  useEffect(() => {
+    if (user) {
+      getAllCountries();
+    } else {
+      setCountries([]);
+    }
+  }, [user]);
 
   const handleSubmitCountry = async (evt, formData) => {
     evt.preventDefault();
     const newCountry = await createCountry(formData);
-  
+
     setCountries([...countries, newCountry]);
     navigate("/yourcountries");
   };
@@ -69,34 +73,23 @@ function App() {
     setCountries(
       countries.filter((country) => country._id !== deletedCountry._id)
     );
-    navigate('/');
+    navigate("/");
   };
-
-
 
   const handleDeleteCity = async (countryId, cityId) => {
     try {
-      const updatedCountry = await deleteCity(countryId, cityId)
-      let updatedCountries = countries.map((country) => {country._id === updatedCountry._id ? updatedCountry : country})
-      setCountries(updatedCountries)
-        
-  
-  
-    
+      const updatedCountry = await deleteCity(countryId, cityId);
+      console.log('updated Country:', updatedCountry)
+      let updatedCountries = countries.map((country) => country._id === updatedCountry._id ? updatedCountry : country);
+      setCountries(updatedCountries);
+      navigate(`/country/${countryId}`);
     } catch (error) {
       console.error("Error deleting city:", error);
     }
   };
-  
-
-  useEffect(() => {
-    if (user) getAllCountries();
-  
-
-  }, [user]);
 
   return (
-    <main id="react-app" >
+    <main id="react-app">
       <NavBar user={user} setUser={setUser} />
       <section id="main-section">
         {user ? (
@@ -115,7 +108,10 @@ function App() {
                 />
               }
             />
-            <Route path="/yourcountries" element={<YourCountriesPage user={user} countries={countries} />} />
+            <Route
+              path="/yourcountries"
+              element={<YourCountriesPage user={user} countries={countries} />}
+            />
             <Route
               path="/country/new"
               element={
@@ -124,11 +120,22 @@ function App() {
             />
             <Route
               path="/country/:countryId/city/:cityId"
-              element={<CityDetailsPage user={user} countries={countries} handleDeleteCity={handleDeleteCity} />}
+              element={
+                <CityDetailsPage
+                  user={user}
+                  countries={countries}
+                  handleDeleteCity={handleDeleteCity}
+                />
+              }
             />
             <Route
               path="/country/:countryId/city/:cityId/edit"
-              element={<EditCityFormPage countries={countries} handleSubmitUpdatedCity={handleSubmitUpdatedCity}/>}
+              element={
+                <EditCityFormPage
+                  countries={countries}
+                  handleSubmitUpdatedCity={handleSubmitUpdatedCity}
+                />
+              }
             />
             <Route
               path="/country/:countryId/newcity"
