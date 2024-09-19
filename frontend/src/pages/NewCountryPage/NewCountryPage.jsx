@@ -19,6 +19,11 @@ const NewCountryPageForm = ({handleSubmitCountry}) => {
 
 
   return (
+  
+    <>
+    <br></br>
+    <h1>Add a new country</h1>
+    <br></br>
     <main className={styles.form}>
       <form onSubmit={ (evt) => handleSubmitCountry(evt, formData)}>
         <label htmlFor="name-input">Country Name</label>
@@ -42,6 +47,7 @@ const NewCountryPageForm = ({handleSubmitCountry}) => {
         <button onClick={(evt) => {console.log(evt.type)}} type="submit">SUBMIT</button>
       </form>
     </main>
+    </>
   );
 };
 
