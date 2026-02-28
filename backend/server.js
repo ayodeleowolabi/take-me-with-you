@@ -1,11 +1,12 @@
+// Process the secrets/config vars in .env
+require('dotenv').config({ path: __dirname + '/.env' });
+
 const path = require('path'); // Built into Node
 const express = require('express');
 const logger = require('morgan');
 const app = express();
 const countryRouter = require('./controllers/countries.js');
 
-// Process the secrets/config vars in .env
-require('dotenv').config();
 
 // Connect to Database
 const mongoose = require('mongoose');
