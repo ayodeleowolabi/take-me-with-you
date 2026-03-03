@@ -1,7 +1,7 @@
 // Process the secrets/config vars in .env
 console.log('PORT:', process.env.PORT);
 console.log('MONGO:', process.env.MONGODB_URI ? 'SET' : 'NOT SET');
-equire('dotenv').config({ path: __dirname + '/.env' });
+require('dotenv').config({ path: __dirname + '/.env' });
 
 const path = require('path'); // Built into Node
 const express = require('express');
