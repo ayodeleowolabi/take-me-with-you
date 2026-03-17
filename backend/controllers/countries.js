@@ -119,9 +119,32 @@ async function deleteCountry(req, res) {
 async function createCity(req, res) {
   console.log(req.body);
   try {
-    const country = await Country.findById(req.params.countryId).populate(
-      "traveller"
-    );
+    const country = await Country.findById(req.params.countryId).populate("traveller");
+
+    // Geocode the city using OpenStreetMap Nominatim (free, no key needed)
+    try {
+      const axios = require('axios');
+      const geoRes = await axios.get('https://nominatim.openstreetmap.org/search', {
+        params: {
+          q: `${req.body.name}, ${country.name}`,
+          format: 'json',
+          limit: 1
+        },
+        headers: {
+          'User-Agent': 'take-me-with-you-app'
+        }
+      });
+
+      if (geoRes.data.length > 0) {
+        req.body.lat = parseFloat(geoRes.data[0].lat);
+        req.body.lng = parseFloat(geoRes.data[0].lon);
+        console.log(`Geocoded ${req.body.name}: ${req.body.lat}, ${req.body.lng}`);
+      }
+    } catch (geoError) {
+      // Don't block city creation if geocoding fails
+      console.log('Geocoding failed, city will be saved without coordinates:', geoError.message);
+    }
+
     country.city.push(req.body);
     await country.save();
 
